@@ -1,7 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "./App.scss";
-import InvoiceDetails from "./InvoiceDetails";
+//import InvoiceDetails from "./InvoiceDetails";
 
 function Invoice(props) {
   return (

@@ -1,6 +1,4 @@
 import React from "react";
-import Form from "./Invoice";
-import Temp from "./Temp";
 import Invoice from "./Invoice.js";
 import InvoiceDetails from "./InvoiceDetails";
 import "./App.scss";
@@ -25,7 +23,7 @@ class App extends React.Component {
           itemName: "",
           itemsQuantity: "",
           itemRate: "",
-          amount: "",
+          //amount: "0",
         },
       ],
     };
@@ -79,10 +77,10 @@ class App extends React.Component {
   handleOnChange = (event, ind, Name) => {
     let item = [...this.state.invoiceItems];
     this.state.invoiceItems.map((invoicc, index) => {
-      if (index == ind) {
-        if (Name == "name") item[index].itemName = event.target.value;
-        if (Name == "Quan") item[index].itemsQuantity = event.target.value;
-        if (Name == "Rate") item[index].itemRate = event.target.value;
+      if (index === ind) {
+        if (Name === "name") item[index].itemName = event.target.value;
+        if (Name === "Quan") item[index].itemsQuantity = event.target.value;
+        if (Name === "Rate") item[index].itemRate = event.target.value;
       }
     });
     this.setState({
@@ -106,6 +104,14 @@ class App extends React.Component {
         //paymentTerms: this.userData.paymentTerms,
         duedate: this.userData.duedate,
         tax: this.userData.tax,
+        invoiceItems: [
+          {
+            itemName: this.userData.itemName,
+            itemsQuantity: this.userData.itemsQuantity,
+            itemRate: this.userData.itemRate,
+            //amount: "",
+          },
+        ],
       });
     } else {
       this.setState({
@@ -119,6 +125,14 @@ class App extends React.Component {
         payterms: "",
         duedate: "",
         tax: "",
+        invoiceItems: [
+          {
+            itemName: "",
+            itemsQuantity: "",
+            itemRate: "",
+            //amount: "",
+          },
+        ],
       });
     }
   }
@@ -131,52 +145,64 @@ class App extends React.Component {
     var pdfConverter = require("jspdf");
     let totalAmount = 0;
     var doc = new pdfConverter();
-    //doc.addImage(logo, "JPEG", 130, 10, 70, 40);
-    doc.setFontSize(26);
-    doc.setFontType("bold");
-    doc.text(10, 20, "INVOICE");
-    doc.setFontSize(16);
-    doc.setFont("loto");
-    doc.setFontType("normal");
-    doc.setTextColor(0);
-    doc.text(10, 30, "# " + this.state.invoiceNumber);
-    doc.text(10, 37, "Bill to :");
-    doc.setTextColor(80);
-    doc.text(10, 44, this.state.billInfo);
-    doc.text(10, 60, "Date  :" + this.state.date);
 
-    doc.setLineWidth(12);
-    doc.setDrawColor(44, 68, 71);
-    doc.line(210, 70, 0, 70);
-    doc.setTextColor(256);
-    doc.text(10, 72, "Item");
-    doc.text(95, 72, "Quantity");
-    doc.text(135, 72, "Rate");
-    doc.text(175, 72, "Amount");
-    doc.setTextColor(0);
+    // Empty square
+    doc.setDrawColor(0);
+    doc.setFillColor(211, 211, 211);
+    doc.rect(0, 0, 900, 100, "F");
+
+    doc.text(20, 30, "From");
+    doc.text(20, 40, this.state.from);
+    doc.text(175, 30, "Bill To");
+    doc.text(175, 40, this.state.billInfo);
+    doc.text(20, 60, "INVOICE");
+    doc.text(20, 70, this.state.invoiceNumber);
+    doc.text(20, 80, this.state.date);
+
+    //TOTAL
+    doc.setDrawColor(0);
+    doc.setFillColor(0, 0, 0);
+    doc.rect(110, 50, 85, 30, "F");
+    //ITEMS
+    doc.text(20, 93, "Item");
+    doc.text(95, 93, "Quantity");
+    doc.text(135, 93, "Rate");
+    doc.text(175, 93, "Amount");
+
     this.state.invoiceItems.map((item, index) => {
       totalAmount += item.itemRate * item.itemsQuantity;
 
-      doc.text(10, 82 + index * 8, item.itemName);
-      doc.text(95, 82 + index * 8, "" + item.itemsQuantity);
-      doc.text(135, 82 + index * 8, "Rs." + item.itemRate);
-      doc.text(175, 82 + index * 8, "Rs." + item.itemRate * item.itemsQuantity);
+      doc.text(20, 110 + index * 8, item.itemName);
+      doc.text(95, 110 + index * 8, "" + item.itemsQuantity);
+      doc.text(135, 110 + index * 8, "$" + item.itemRate);
+      doc.text(175, 110 + index * 8, "$" + item.itemRate * item.itemsQuantity);
+      doc.setLineWidth(12);
     });
+    //var logo =
+    //"https://www.freepik.com/free-vector/green-abstract-letter-h-logo_821643.htm#page=1&query=web%20development%20logo&position=10";
 
-    doc.text(100, 150, "Subtotal:  " + " Rs." + totalAmount);
-    doc.text(
-      100,
-      160,
-      "CGST+IGST (12%):  " + " Rs." + (totalAmount * 12) / 100
-    );
-    doc.text(
-      100,
-      170,
-      "Total:  " + " Rs." + ((totalAmount * 12) / 100 + totalAmount)
-    );
+    //doc.addImage(logo, "JPEG", 0, 30, 70, 40);
 
-    doc.save("invoice.pdf");
+    doc.setDrawColor(0);
+    doc.setFillColor(211, 211, 211);
+    doc.rect(20, 256, 120, 12, "F");
+
+    doc.text(20, 257, "Subtotal:  " + " $" + totalAmount);
+    doc.text(50, 257, "Tax:  " + " $" + (totalAmount * 12) / 100);
+    doc.text(
+      120,
+      257,
+      "Total:  " + " $" + ((totalAmount * 12) / 100 + totalAmount)
+    );
+    doc.text(20, 273, "Notes");
+    doc.text(120, 273, this.state.notes);
+    doc.setLineWidth(0.5);
+    doc.line(20, 275, 190, 275);
+    doc.text(20, 280, this.state.terms);
+
+    doc.save("invoice" + this.state.invoiceNumber + ".pdf");
   };
+
   render() {
     return (
       <div>
@@ -197,7 +223,6 @@ class App extends React.Component {
             invoiceNo={this.state.invoiceNumber}
           />
           <InvoiceDetails
-            //pdf={this.convertPdf}
             items={this.state.invoiceItems}
             event={this.addNewItem}
             ItemName={this.handleItemName}
@@ -228,7 +253,7 @@ class App extends React.Component {
                 >
                   Subtotal
                 </label>
-                $<p>{this.state.totalAmount}</p>
+                $
                 <div className="form-row">
                   <div className="col"></div>
                   <div className="col-auto">
