@@ -12,7 +12,11 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
     "react-to-pdf": "0.0.13",
+    "styled-components": "^5.2.0",
     "tailwindcss": "^1.8.10"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.7.0"
   },
   "scripts": {
     "start": "react-scripts start",

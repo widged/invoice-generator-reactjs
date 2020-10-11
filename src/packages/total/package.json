@@ -1,0 +1,24 @@
+{
+  "name": "invoice-total",
+  "description": "...",
+  "version": "1.0.0",
+  "repository": "",
+  "main": "index.js",
+  "private": true,
+  "engines": {
+    "node": ">= 12.13.0",
+    "npm": ">= 6.12.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "devDependencies": {
+    "parcel-bundler": "^1.7.0"
+  },
+  "alias": {},
+  "scripts": {
+    "usage": "parcel __usage__/index.html --no-cache --no-hmr --open"
+  }
+}

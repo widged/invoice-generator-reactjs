@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 function AddMoreInvoice(props) {
   return (
     <div className="row">
@@ -60,7 +60,7 @@ function AddMoreInvoice(props) {
           type="text"
           value={props.item.itemName}
           onChange={(e) => {
-            props.onChangeHandler(e, props.ind, "name");
+            props.onChangeHandler(e, props.ind, 'name');
           }}
         />
       </div>
@@ -70,7 +70,7 @@ function AddMoreInvoice(props) {
           type="text"
           value={props.item.itemsQuantity}
           onChange={(e) => {
-            props.onChangeHandler(e, props.ind, "Quan");
+            props.onChangeHandler(e, props.ind, 'Quan');
           }}
         />
       </div>
@@ -80,7 +80,7 @@ function AddMoreInvoice(props) {
           type="text"
           value={props.item.itemRate}
           onChange={(e) => {
-            props.onChangeHandler(e, props.ind, "Rate");
+            props.onChangeHandler(e, props.ind, 'Rate');
           }}
         />
       </div>

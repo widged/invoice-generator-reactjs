@@ -1,5 +1,5 @@
-import React from "react";
-import "./App.scss";
+import React from 'react';
+import './InvoiceManager.scss';
 //import InvoiceDetails from "./InvoiceDetails";
 
 function Invoice(props) {
@@ -30,7 +30,7 @@ function Invoice(props) {
                     type="text"
                     className="form-control"
                     value={props.invoiceNo}
-                    onChange={(e) => props.handleChange(e, "invoice")}
+                    onChange={(e) => props.handleChange(e, 'invoice')}
                   />
                 </div>
               </div>
@@ -44,16 +44,13 @@ function Invoice(props) {
                 className="form-control"
                 //id="inlineFormInputGroup"
                 value={props.from}
-                onChange={(e) => props.handleChange(e, "from")}
+                onChange={(e) => props.handleChange(e, 'from')}
                 placeholder="Who is this invoice from? (required)"
               ></textarea>
             </div>
             <div className="form-group row">
               <div className="col">
-                <label
-                  htmlFor="example-date-input"
-                  className="col col-form-label"
-                >
+                <label htmlFor="example-date-input" className="col col-form-label">
                   Bill To
                 </label>
                 <textarea
@@ -61,14 +58,11 @@ function Invoice(props) {
                   //id="inlineFormInputGroup"
                   placeholder="Who is this invoice to? (required)"
                   value={props.billInfo}
-                  onChange={(e) => props.handleChange(e, "bill")}
+                  onChange={(e) => props.handleChange(e, 'bill')}
                 ></textarea>
               </div>
               <div className="col">
-                <label
-                  htmlFor="example-date-input"
-                  className="col col-form-label"
-                >
+                <label htmlFor="example-date-input" className="col col-form-label">
                   Ship To
                 </label>
 
@@ -76,7 +70,7 @@ function Invoice(props) {
                   className="form-control"
                   //id="inlineFormInputGroup"
                   value={props.shipTo}
-                  onChange={(e) => props.handleChange(e, "shipTo")}
+                  onChange={(e) => props.handleChange(e, 'shipTo')}
                   placeholder="(optional)"
                 ></textarea>
               </div>
@@ -84,10 +78,7 @@ function Invoice(props) {
           </div>
           <div className="col">
             <div className="row invoice mb-1">
-              <label
-                htmlFor="example-date-input"
-                className="col-6 col-form-label"
-              >
+              <label htmlFor="example-date-input" className="col-6 col-form-label">
                 Date
               </label>
               <div className="col-6">
@@ -95,16 +86,13 @@ function Invoice(props) {
                   className="form-control"
                   type="date"
                   value={props.date}
-                  onChange={(e) => props.handleChange(e, "date")}
+                  onChange={(e) => props.handleChange(e, 'date')}
                   id="example-date-input"
                 />
               </div>
             </div>
             <div className="row invoice mb-1">
-              <label
-                htmlFor="example-date-input"
-                className="col-6 col-form-label"
-              >
+              <label htmlFor="example-date-input" className="col-6 col-form-label">
                 Payment Terms
               </label>
               <div className="col-6">
@@ -112,7 +100,7 @@ function Invoice(props) {
                   type="text"
                   className="form-control"
                   value={props.payterms}
-                  onChange={(e) => props.handleChange(e, "payterms")}
+                  onChange={(e) => props.handleChange(e, 'payterms')}
                   placeholder=""
                   id="example-date-input"
                 />
@@ -120,10 +108,7 @@ function Invoice(props) {
             </div>
 
             <div className="row invoice">
-              <label
-                htmlFor="example-date-input"
-                className="col-6 col-form-label"
-              >
+              <label htmlFor="example-date-input" className="col-6 col-form-label">
                 Due Date
               </label>
               <div className="col-6">
@@ -131,24 +116,13 @@ function Invoice(props) {
                   className="form-control"
                   type="date"
                   value={props.duedate}
-                  onChange={(e) => props.handleChange(e, "duedate")}
+                  onChange={(e) => props.handleChange(e, 'duedate')}
                   id="example-date-input"
                 />
               </div>
             </div>
           </div>
         </div>
-
-        <table className="table mb-0">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">Item</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Rate</th>
-              <th scope="col">Amount</th>
-            </tr>
-          </thead>
-        </table>
 
         {/*} <div className="row">
             <div className="col">
