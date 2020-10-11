@@ -51,6 +51,7 @@ class InvoicingApplication extends Component {
     this.bound.onTaxChange = (e) => this.setState({ tax: e.target.value });
     this.bound.onNotesChange = (e) => this.setState({ notes: e.target.value });
     this.bound.onTermsChange = (e) => this.setState({ terms: e.target.value });
+    this.bound.onConvertPdf = this.onConvertPdf.bind(this);
   }
 
   componentDidMount() {

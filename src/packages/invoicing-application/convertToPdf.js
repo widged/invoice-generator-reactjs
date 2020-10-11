@@ -2,7 +2,6 @@ export const convertToPdf = (props) => {
   var pdfConverter = require('jspdf');
 
   const { from, billInfo, invoiceNumber, date, invoiceItems, notes, terms } = props;
-  let totalAmount = 0;
   var doc = new pdfConverter();
 
   // Empty square
@@ -28,13 +27,18 @@ export const convertToPdf = (props) => {
   doc.text(135, 93, 'Rate');
   doc.text(175, 93, 'Amount');
 
-  invoiceItems.map((item, index) => {
-    totalAmount += item.itemRate * item.itemsQuantity;
+  let totalAmount = invoiceItems.reduce((acc, item, index) => {
+    const { itemName, itemsQuantity, itemRate } = item;
+    acc = acc + itemRate * itemsQuantity;
+    return acc;
+  }, 0);
 
-    doc.text(20, 110 + index * 8, item.itemName);
-    doc.text(95, 110 + index * 8, '' + item.itemsQuantity);
-    doc.text(135, 110 + index * 8, '$' + item.itemRate);
-    doc.text(175, 110 + index * 8, '$' + item.itemRate * item.itemsQuantity);
+  invoiceItems.forEach((item, index) => {
+    const { itemName, itemsQuantity, itemRate } = item;
+    doc.text(20, 110 + index * 8, itemName || '');
+    doc.text(95, 110 + index * 8, '' + itemsQuantity || '');
+    doc.text(135, 110 + index * 8, '$' + itemRate || '');
+    doc.text(175, 110 + index * 8, '$' + itemRate * itemsQuantity);
     doc.setLineWidth(12);
   });
   //var logo =
