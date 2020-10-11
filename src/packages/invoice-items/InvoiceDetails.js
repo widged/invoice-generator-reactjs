@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
-import AddMoreInvoice from './AddMoreInvoice';
+import AddOneItem from './AddOneItem';
 function InvoiceDetails(props) {
-  const { items, del: onItemDelete, onChangeHandler, event: onAddItem, pdf: onExportToPdf } = props;
+  const { items, onDeleteItem, whenItemChange, onAddItem } = props;
+
+  console.log('InvoiceDetails', items);
 
   return (
     <div>
@@ -19,33 +21,23 @@ function InvoiceDetails(props) {
       <div className="card-body">
         <form>
           {(items || []).map((item, index) => {
-            return (
-              <Fragment>
-                <AddMoreInvoice
-                  item={item}
-                  ind={index}
-                  del={onItemDelete}
-                  onChangeHandler={onChangeHandler}
-                />
-              </Fragment>
-            );
+            const onChange = (e) => {
+              const { field } = e.currentTarget.dataset;
+              if (['itemName', 'itemsQuantity', 'itemRate'].includes(field)) {
+                item = { ...item, [field]: e.target.value };
+                whenItemChange(item, index);
+              }
+            };
+            const onDelete = (e) => {
+              props.onDelete(index);
+            };
+            return <AddOneItem {...item} onDelete={onDelete} onChange={onChange} />;
           })}
         </form>
         <div className="btn btn-primary" onClick={onAddItem}>
           + Line Item
         </div>
       </div>
-      {/*} <div className="row">
-        <div className="col-sm-12 mt-5">
-          <div
-            className="btn btn-primary col-sm-6 sol-xs-12 mt-5"
-            onClick={onExportToPdf}
-            style={{ margin: "20px auto", display: "block" }}
-          >
-            Generate PDF
-          </div>
-        </div>
-        </div>*/}
     </div>
   );
 }

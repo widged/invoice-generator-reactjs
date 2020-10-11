@@ -1,8 +1,8 @@
 import React from 'react';
-import './InvoiceManager.scss';
-//import InvoiceDetails from "./InvoiceDetails";
 
 function Invoice(props) {
+  const { invoiceNo, from, billInfo, shipTo, date, payterms, duedate } = props;
+  const { onMetaChange } = props;
   return (
     <div className="container">
       <form>
@@ -29,8 +29,9 @@ function Invoice(props) {
                   <input
                     type="text"
                     className="form-control"
-                    value={props.invoiceNo}
-                    onChange={(e) => props.handleChange(e, 'invoice')}
+                    value={invoiceNo}
+                    onChange={onMetaChange}
+                    data-field="invoiceNumber"
                   />
                 </div>
               </div>
@@ -43,8 +44,9 @@ function Invoice(props) {
               <textarea
                 className="form-control"
                 //id="inlineFormInputGroup"
-                value={props.from}
-                onChange={(e) => props.handleChange(e, 'from')}
+                value={from}
+                onChange={onMetaChange}
+                data-field="from"
                 placeholder="Who is this invoice from? (required)"
               ></textarea>
             </div>
@@ -57,8 +59,9 @@ function Invoice(props) {
                   className="form-control"
                   //id="inlineFormInputGroup"
                   placeholder="Who is this invoice to? (required)"
-                  value={props.billInfo}
-                  onChange={(e) => props.handleChange(e, 'bill')}
+                  value={billInfo}
+                  data-field="billInfo"
+                  onChange={onMetaChange}
                 ></textarea>
               </div>
               <div className="col">
@@ -69,8 +72,9 @@ function Invoice(props) {
                 <textarea
                   className="form-control"
                   //id="inlineFormInputGroup"
-                  value={props.shipTo}
-                  onChange={(e) => props.handleChange(e, 'shipTo')}
+                  value={shipTo}
+                  data-field="shipTo"
+                  onChange={onMetaChange}
                   placeholder="(optional)"
                 ></textarea>
               </div>
@@ -85,8 +89,9 @@ function Invoice(props) {
                 <input
                   className="form-control"
                   type="date"
-                  value={props.date}
-                  onChange={(e) => props.handleChange(e, 'date')}
+                  value={date}
+                  data-field="date"
+                  onChange={onMetaChange}
                   id="example-date-input"
                 />
               </div>
@@ -99,8 +104,9 @@ function Invoice(props) {
                 <input
                   type="text"
                   className="form-control"
-                  value={props.payterms}
-                  onChange={(e) => props.handleChange(e, 'payterms')}
+                  value={payterms}
+                  data-field="payterms"
+                  onChange={onMetaChange}
                   placeholder=""
                   id="example-date-input"
                 />
@@ -115,8 +121,9 @@ function Invoice(props) {
                 <input
                   className="form-control"
                   type="date"
-                  value={props.duedate}
-                  onChange={(e) => props.handleChange(e, 'duedate')}
+                  value={duedate}
+                  onChange={onMetaChange}
+                  data-field="duedate"
                   id="example-date-input"
                 />
               </div>
