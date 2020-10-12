@@ -29,7 +29,7 @@ function InvoiceDetails(props) {
               }
             };
             const onDelete = (e) => {
-              props.onDelete(index);
+              onDeleteItem(index);
             };
             return <AddOneItem {...item} onDelete={onDelete} onChange={onChange} />;
           })}

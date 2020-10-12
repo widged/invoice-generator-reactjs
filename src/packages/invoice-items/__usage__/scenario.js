@@ -1,6 +1,6 @@
 import React from 'react';
 import InvoiceItemsManager from '../InvoiceItemsManager';
-import '../../invoicing-application/InvoiceManager.scss';
+import '../../invoicing-application/styled.js';
 
 const items = [
   {
