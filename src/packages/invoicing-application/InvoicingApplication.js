@@ -1,13 +1,25 @@
+// presentational
 import React, { Component, Fragment } from 'react';
-
+import {
+  GlobalStyle,
+  AppBox,
+  InvoiceWrapper,
+  H1,
+  PageBottom,
+  TotalsBox,
+  NotesAndTermsBox,
+} from './styled';
+// packages
 import InvoiceMeta from '../invoice-meta/InvoiceMeta.js';
 import InvoiceItemsManager from '../invoice-items/InvoiceItemsManager';
-import NotesAndTerms from './NotesAndTerms';
+import Notes from './Notes';
+import Terms from './Terms';
 import Subtotal from '../subtotal/Subtotal';
 import Total from '../total/Total';
+// utilities
 import { convertToPdf } from './convertToPdf';
 import { computeTotals } from './computeTotals';
-import { GlobalStyle, AppBox, PageBottom, TotalsBox } from './styled';
+// io
 import { dataToLocalStorage, dataFromLocalStorage } from './localStorage';
 
 class InvoicingApplication extends Component {
@@ -102,10 +114,8 @@ class InvoicingApplication extends Component {
     return (
       <AppBox>
         <GlobalStyle />
-        <h1 style={{ textAlign: 'center', fontSize: '45px', fontWeight: '20px' }}>
-          Invoice Generator
-        </h1>
-        <div className="invoice-wrapper">
+        <H1>Invoice Generator</H1>
+        <InvoiceWrapper>
           <InvoiceMeta
             onMetaChange={onMetaChange}
             {...{ from, date, payterms, duedate, billInfo, shipTo, invoiceNumber }}
@@ -113,29 +123,26 @@ class InvoicingApplication extends Component {
           <InvoiceItemsManager items={invoiceItems} whenChange={whenInvoiceItemsChange} />
 
           <PageBottom>
-            <NotesAndTerms {...{ notes, onNotesChange, terms, onTermsChange }} />
+            <NotesAndTermsBox>
+              <Notes {...{ notes, onNotesChange }} />
+              <Terms {...{ terms, onTermsChange }} />
+            </NotesAndTermsBox>
             <TotalsBox>
               <Subtotal tax={tax} onTaxChange={onTaxChange} subtotal={subtotal.toFixed(2)} />
               <Total total={totalAmount.toFixed(2)} />
             </TotalsBox>
           </PageBottom>
-        </div>
+        </InvoiceWrapper>
         <h3 style={{ textAlign: 'center' }}>
           Currency:<strong>USD</strong>
         </h3>
-        {/*} <button style={{ alignItems: "center" }} className="btn btn-primary">
-          Send Invoice
-    </button>*/}
-
-        <div className="col-sm-12">
-          <button
-            className="btn btn-primary" // col-sm-6 sol-xs-12 mt-5"
-            onClick={onConvertPdf}
-            style={{ margin: '20px auto', display: 'block' }}
-          >
-            Generate PDF
-          </button>
-        </div>
+        <button
+          className="btn btn-primary" // col-sm-6 sol-xs-12 mt-5"
+          onClick={onConvertPdf}
+          style={{ margin: '20px auto', display: 'block' }}
+        >
+          Generate PDF
+        </button>
       </AppBox>
     );
   }

@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import { Row, Col } from '../grid-system/styled-grid';
 
 export const GlobalStyle = createGlobalStyle`
 body {
@@ -18,23 +19,23 @@ body {
 }
 `;
 
+export const InvoiceWrapper = styled.div`
+  //position: relative;
+  background: #fff;
+
+  border: 1px solid rgb(169, 169, 169);
+  padding: 20px;
+
+  box-shadow: 1px 1px 1px white, 2px 2px 1px white, 3px 3px 1px gray, 4px 4px 1px white,
+    5px 5px 1px white, 6px 6px 1px gray, 7px 7px 1px white;
+
+  margin: 30px auto 50px auto;
+  width: 800px;
+`;
+
 export const AppBox = styled.div`
   .App {
     text-align: center;
-  }
-
-  .invoice-wrapper {
-    //position: relative;
-    background: #fff;
-
-    border: 1px solid rgb(169, 169, 169);
-    padding: 20px;
-
-    box-shadow: 1px 1px 1px white, 2px 2px 1px white, 3px 3px 1px gray, 4px 4px 1px white,
-      5px 5px 1px white, 6px 6px 1px gray, 7px 7px 1px white;
-
-    margin: 30px auto 50px auto;
-    width: 800px;
   }
 
   .invoice {
@@ -50,9 +51,14 @@ export const AppBox = styled.div`
   }
 `;
 
-export const PageBottom = styled.div`
-  display: flex;
-  justify-content: space-between;
+export const PageBottom = styled(Row)``;
+
+export const TotalsBox = styled(Col)``;
+
+export const H1 = styled.h1`
+  text-align: 'center';
+  font-size: '45px';
+  font-weight: '20px';
 `;
 
-export const TotalsBox = styled.div``;
+export const NotesAndTermsBox = styled(Col)``;

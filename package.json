@@ -13,6 +13,7 @@
     "react-scripts": "3.4.3",
     "react-to-pdf": "0.0.13",
     "styled-components": "^5.2.0",
+    "styled-components-grid": "^2.2.2",
     "tailwindcss": "^1.8.10"
   },
   "devDependencies": {
