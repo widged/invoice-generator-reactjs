@@ -43,10 +43,13 @@ class InvoiceItemsManager extends Component {
     let invoiceItems = this.state.invoiceItems.map((d, i) => {
       return i === idx ? item : d;
     });
-    this.setState({ invoiceItems });
+    this.setState({ invoiceItems }, () => {
+      this.signalChange();
+    });
   }
 
   render() {
+    console.log('[InvoiceItemsManager]');
     const { onAddNewItem, onDeleteItem, whenItemChange } = this.bound;
     const { invoiceItems } = this.state;
 

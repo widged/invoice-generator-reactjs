@@ -64,6 +64,7 @@ class InvoicingApplication extends Component {
     this.bound.onNotesChange = (e) => this.setState({ notes: e.target.value });
     this.bound.onTermsChange = (e) => this.setState({ terms: e.target.value });
     this.bound.onConvertPdf = this.onConvertPdf.bind(this);
+    this.bound.whenInvoiceItemsChange = this.whenInvoiceItemsChange.bind(this);
   }
 
   componentDidMount() {
@@ -76,11 +77,9 @@ class InvoicingApplication extends Component {
   }
 
   whenInvoiceItemsChange(items) {
-    /*
     this.setState({
-      invoiceItems: items,
+      invoiceItems: [...items],
     });
-    */
   }
 
   onConvertPdf() {
@@ -102,11 +101,18 @@ class InvoicingApplication extends Component {
     const { from, date, payterms, duedate, billInfo, shipTo, invoiceNumber } = this.state;
     // invoice items
     const { invoiceItems } = this.state;
-    const { whenInvoiceItemsChange } = this;
     // subtotal
     const { tax } = this.state;
-    const { onTaxChange, onConvertPdf, onMetaChange, onNotesChange, onTermsChange } = this.bound;
+    const {
+      onTaxChange,
+      onConvertPdf,
+      onMetaChange,
+      onNotesChange,
+      onTermsChange,
+      whenInvoiceItemsChange,
+    } = this.bound;
 
+    console.log('**compute totals**', invoiceItems, tax);
     const { subtotal, total: totalAmount } = computeTotals(invoiceItems, tax);
     // notes
     const { notes, terms } = this.state;
@@ -118,7 +124,15 @@ class InvoicingApplication extends Component {
         <InvoiceWrapper>
           <InvoiceMeta
             onMetaChange={onMetaChange}
-            {...{ from, date, payterms, duedate, billInfo, shipTo, invoiceNumber }}
+            {...{
+              from,
+              date,
+              payterms,
+              duedate,
+              billInfo,
+              shipTo,
+              invoiceNumber,
+            }}
           />
           <InvoiceItemsManager items={invoiceItems} whenChange={whenInvoiceItemsChange} />
 

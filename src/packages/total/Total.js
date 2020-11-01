@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Styled = styled.div`
   display: div;
   padding: 8px;
+  max-width: 160px;
 `;
 
 const FullWidth = styled.div`

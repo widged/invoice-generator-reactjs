@@ -2,9 +2,6 @@ import React, { Fragment } from 'react';
 import AddOneItem from './AddOneItem';
 function InvoiceDetails(props) {
   const { items, onDeleteItem, whenItemChange, onAddItem } = props;
-
-  console.log('InvoiceDetails', items);
-
   return (
     <div>
       <table className="table mb-0">
